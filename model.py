@@ -12,8 +12,15 @@ from numpy import clip, column_stack, argmax
 
 # %% Load dataset and create train-test sets
 data = load_wine()
+
 X = data.data
 y = data.target
+print("Input:")
+print(X)
+min_max_scaler = preprocessing.MinMaxScaler()
+X = min_max_scaler.fit_transform(X)
+print("Input_normalized:")
+print(X)
 var_names = data.feature_names
 var_names = [var_names[i][0:-5] for i in range(0, len(var_names))]
 var_names = [var_names[i].title().replace(' ','') for i in range(0, len(var_names))]
