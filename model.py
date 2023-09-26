@@ -9,6 +9,7 @@ from pyfume.Tester import SugenoFISTester
 from numpy import copy
 from sklearn.metrics import accuracy_score, cohen_kappa_score
 from numpy import clip, column_stack, argmax
+from numpy import savetxt
 
 # %% Load dataset and create train-test sets
 data = load_wine()
@@ -122,6 +123,8 @@ y_pred_probs = column_stack((y_pred_probs_0_vs_all[:,1],y_pred_probs_0_vs_all[:,
 y_pred_probs = y_pred_probs/y_pred_probs.sum(axis=1,keepdims=1)
 
 y_pred = argmax(y_pred_probs,axis=1)
+
+savetxt("predicted_classes.csv", y_pred, delimiter=",")
 
 # %% Compute classification metrics
 acc_score = accuracy_score(y_test, y_pred)
